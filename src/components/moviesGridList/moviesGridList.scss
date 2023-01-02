@@ -1,0 +1,19 @@
+.movie {
+    &__grid {
+        margin-top: 30px;
+        
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(auto, 250px));
+        justify-content: space-between;
+        row-gap: 35px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .movie {
+        &__grid {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

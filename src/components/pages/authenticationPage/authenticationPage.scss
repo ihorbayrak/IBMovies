@@ -1,0 +1,105 @@
+@import "../../../styles/variables.scss";
+
+.authentication {
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    &__form {
+        margin-top: 30px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        max-width: 500px;
+        min-height: 200px;
+        input {
+            padding: 10px 10px 10px 5px;
+            margin: 25px 0;
+
+            display: block;
+            width: 100%;
+
+            background: none;
+            background-color: white;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid $font-color;
+
+            font-size: 18px;
+            color: $font-color;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    &__error {
+        color: red;
+        transform: translateY(-20px);
+    }
+    &__button {
+        padding: 12px 24px;
+
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+        background-color: rgb(255, 255, 255);
+        
+        color: $font-color;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        
+        cursor: pointer;
+
+        transition: 0.3s all;
+
+        &:hover {
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        &:disabled {
+            filter: grayscale(100%);
+            background-color: #c7b7b7;
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+        }
+        &_blue {
+            margin-left: 20px;
+            
+            color: rgb(255, 255, 255);
+            background-color: #4285f4;
+            &:hover {
+                transition: 0.5s all;
+                background-color: #164da4;
+                box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .authentication {
+        &__container {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        &__form {
+            input {
+                &::placeholder {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .authentication {
+        &__button_blue {
+            margin-left: 0;
+        }
+    }
+}

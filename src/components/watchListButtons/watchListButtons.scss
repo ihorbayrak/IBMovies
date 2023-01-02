@@ -1,0 +1,30 @@
+@import "../../styles/variables.scss";
+
+.movie-info {
+    &__watchlist {
+        padding: 13px 15px;
+        margin-top: 20px;
+
+        width: 250px;
+        border-radius: 10px;
+        background: $font-color;
+        border: none;
+        
+        color: white;
+        text-transform: uppercase;
+
+        cursor: pointer;
+        svg {
+            color: white;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        &:hover {
+            transition: 0.3s all;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+        }
+        &_removed {
+            background: $second-color;
+        }
+    }
+}

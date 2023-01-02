@@ -1,0 +1,19 @@
+.sign-in {
+    padding: 15px;
+    .error-message {
+        font-size: 18px;
+        color: red;
+    }
+    .button__group {
+        max-width: 500px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .button__group {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}

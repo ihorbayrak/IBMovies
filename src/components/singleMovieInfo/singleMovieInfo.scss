@@ -1,0 +1,95 @@
+@import "../../styles/variables.scss";
+
+.movie-info {
+    &__grid {
+        display: grid;
+        grid-template-columns: minmax(auto, 250px) auto;
+        grid-auto-flow: row;
+        column-gap: 40px;
+        align-items: center;
+    }
+    &__header {
+        display: flex;
+        flex-direction: column;
+        img {
+            object-fit: cover;
+            height: 350px;
+            width: 250px;
+        }
+    }
+    &__block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: 15px;
+        height: 70%;
+    }
+    &__descr {
+        font-size: 20px;
+    }
+    &__footer {
+        margin-top: 25px;
+
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-auto-flow: row;
+        gap: 20px;
+    }
+    &__general {
+        padding: 10px 0;
+
+        display: flex;
+        flex-direction: column;
+
+        border-radius: 10px;
+        background: #fff;
+
+        text-align: center;
+        color: $font-color;
+    }
+    &__popularity {
+        padding: 10px 0;
+
+        color: rgb(33, 110, 183);
+        font-size: 24px;
+        svg {
+            vertical-align: middle;
+        }
+    }
+    &__budget {
+        padding: 10px 0;
+
+        color: rgb(27, 112, 29);
+        font-size: 24px;
+        svg {
+            font-size: 30px;
+            vertical-align: middle;
+        }
+    }
+    &__revenue {
+        padding: 10px 0;
+
+        color: rgb(19, 232, 33);
+        font-size: 24px;
+        svg {
+            font-size: 30px;
+            vertical-align: middle;
+        }
+    }
+
+    &__title {
+        max-width: 250px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .movie-info {
+        &__grid {
+            grid-template-columns: 1fr;
+        }
+
+        &__footer {
+            grid-template-columns: auto;
+        }
+    }
+}

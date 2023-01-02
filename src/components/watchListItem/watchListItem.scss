@@ -1,0 +1,37 @@
+.watch-list {
+    &__item {
+        padding: 15px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 250px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+        &:hover {
+            transition: 0.3s all;
+            box-shadow: 0 5px 20px black;
+        }
+    }
+    &__img {
+        img {
+            transform: translate(-15px, -15px);
+            width: 250px;
+            height: 350px;
+            object-fit: cover;
+        }
+    }
+    &__delete {
+        margin-top: 10px;
+
+        text-align: right;
+        svg {
+            font-size: 20px;
+            vertical-align: middle;
+            
+            cursor: pointer;
+        }
+    }
+    &__title {
+        text-align: center;
+    }
+}

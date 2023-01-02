@@ -1,0 +1,67 @@
+@import "../../styles/variables.scss";
+
+.app {
+    &__header {
+        padding: 20px 50px;
+
+        display: grid;
+        grid-template-columns: 120px minmax(auto, 500px) auto;
+        column-gap: 70px;
+        align-items: center;
+
+        width: 100%;
+        background: $second-color;
+
+        color: $font-color;
+        text-transform: capitalize;
+    }
+    &__logo {
+        img {
+            max-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+    }
+    &__auth {
+        justify-self: flex-end;
+    }
+}
+
+.hamburger {
+    display: none;
+    width: 26px;
+    height: 12px;
+
+    cursor: pointer;
+    span {
+        margin-bottom: 3px;
+        
+        display: block;
+        height: 2px;
+        width: 26px;
+        background-color: #000;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .app {
+        &__header {
+            grid-template-columns: repeat(3, minmax(120px, auto));
+            justify-content: space-between;
+        }
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .app {
+        &__header {
+            padding: 20px;
+            grid-template-columns: repeat(3, minmax(60px, auto));
+            column-gap: 15px;
+        }
+    }
+}

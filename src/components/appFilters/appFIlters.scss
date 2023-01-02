@@ -1,0 +1,30 @@
+@import "../../styles/variables.scss";
+
+.app {
+    &__filters {
+        margin-top: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__filter {
+        margin-right: 50px;
+        
+        cursor: pointer;
+        &:hover {
+            transition: 0.3s all;
+            color: $main-color;
+        }
+        &_active {
+            color: $main-color;
+            border-bottom: 2px solid $main-color;
+        }
+    }
+
+    .filters__wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+}

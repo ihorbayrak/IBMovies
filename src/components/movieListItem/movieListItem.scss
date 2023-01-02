@@ -1,0 +1,39 @@
+@import "../../styles/variables.scss";
+
+.movie {
+    &__item {
+        padding: 15px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        width: 250px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+
+        cursor: pointer;
+
+        transition: 0.3s transform;
+        &:hover {
+            transition: 0.3s all;
+            box-shadow: 0 5px 20px black;
+            transform: translateY(-8px);
+        }
+    }
+    &__img {
+        img {
+            transform: translate(-15px, -15px);
+            width: 250px;
+            height: 350px;
+            object-fit: cover;
+        }
+    }
+    &__rating {
+        text-align: right;
+        font-weight: 700;
+        color: $font-color;
+    }
+    &__year {
+        color: $font-color;
+    }
+}
