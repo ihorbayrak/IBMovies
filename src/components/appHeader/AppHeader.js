@@ -39,9 +39,9 @@ const AppHeader = () => {
             if (!user) {
                 dispatch(removeCurrentUser());
             }
-
-            return unsubscribe;
         });
+
+        return unsubscribe;
     }, []);
 
     return (
