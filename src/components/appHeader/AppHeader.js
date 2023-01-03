@@ -22,7 +22,7 @@ const AppHeader = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        onAuthStateChangedListener((user) => {
+        const unsubscribe = onAuthStateChangedListener((user) => {
             if (user) {
                 const { displayName, email, uid } = user;
 
@@ -39,6 +39,8 @@ const AppHeader = () => {
             if (!user) {
                 dispatch(removeCurrentUser());
             }
+
+            return unsubscribe;
         });
     }, []);
 
