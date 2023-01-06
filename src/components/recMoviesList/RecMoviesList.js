@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchRecMovies } from '../../utils/reducers/recMoviesSlice/recMoviesSlice';
+import { useGetRecMoviesQuery } from '../../redux/api/apiSlice';
 
 import { Link } from 'react-router-dom';
 
@@ -11,16 +8,12 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './recMoviesList.scss';
 
 const RecMoviesList = ({ movieId }) => {
-    const { movieInfoLoadingStatus, recMovies } = useSelector((state) => state.recMovies);
-    const dispatch = useDispatch();
+    const { data: recMovies, isLoading, isError } = useGetRecMoviesQuery(movieId);
 
-    useEffect(() => {
-        dispatch(fetchRecMovies(movieId));
-    }, [movieId]);
-
-    if (movieInfoLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (movieInfoLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

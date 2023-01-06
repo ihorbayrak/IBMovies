@@ -7,8 +7,8 @@ import {
 } from '../../utils/firebase/firebase';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentUser, removeCurrentUser } from '../../utils/reducers/authSlice/authSlice';
-import { toggleHamburgerMenu } from '../../utils/reducers/navMenuSlice/navMenuSlice';
+import { setCurrentUser, removeCurrentUser } from '../../redux/reducers/authSlice/authSlice';
+import { toggleHamburgerMenu } from '../../redux/reducers/navMenuSlice/navMenuSlice';
 
 import LoggedUser from '../loggedUser/LoggedUser';
 import AppNavigation from '../appNavigation/AppNavigation';

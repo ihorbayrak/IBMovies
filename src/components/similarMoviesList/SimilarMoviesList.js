@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchSimilarMovies } from '../../utils/reducers/similarMoviesSlice/similarMoviesSlice';
+import { useGetSimilarMoviesQuery } from '../../redux/api/apiSlice';
 
 import { Link } from 'react-router-dom';
 
@@ -12,18 +9,12 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './similarMoviesList.scss';
 
 const SimilarMoviesList = ({ movieId }) => {
-    const { similarMoviesLoadingStatus, similarMovies } = useSelector(
-        (state) => state.similarMovies
-    );
-    const dispatch = useDispatch();
+    const { data: similarMovies, isLoading, isError } = useGetSimilarMoviesQuery(movieId);
 
-    useEffect(() => {
-        dispatch(fetchSimilarMovies(movieId));
-    }, [movieId]);
-
-    if (similarMoviesLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (similarMoviesLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

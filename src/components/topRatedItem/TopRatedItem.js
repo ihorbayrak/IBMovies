@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMovieGenres } from '../../utils/reducers/movieGenresSlice/movieGenresSlice';
+import { useGetMovieGenresQuery } from '../../redux/api/apiSlice';
 
 import { Link } from 'react-router-dom';
 
@@ -11,16 +8,12 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './topRatedItem.scss';
 
 const TopRatedItem = ({ movie }) => {
-    const { movieGenresLoadingStatus, movieGenres } = useSelector((state) => state.movieGenres);
-    const dispatch = useDispatch();
+    const { data: movieGenres, isLoading, isError } = useGetMovieGenresQuery();
 
-    useEffect(() => {
-        dispatch(fetchMovieGenres());
-    }, []);
-
-    if (movieGenresLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (movieGenresLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

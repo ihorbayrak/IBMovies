@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+
 import MoviesGridList from '../../moviesGridList/MoviesGridList';
 
 import WatchListItem from '../../watchListItem/WatchListItem';

@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchPopularMovies } from '../../../utils/reducers/popularMoviesSlice/popularMoviesSlice';
+import { useGetPopularMoviesQuery } from '../../../redux/api/apiSlice';
 
 import PopularityItem from '../../popularityItem/PopularityItem';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 import PagePagination from '../../pagePagination/PagePagination';
 
+
 import './popularityPage.scss';
 
 const PopularityPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const { popularMoviesLoadingStatus, popularMovies } = useSelector(
-        (state) => state.popularMovies
-    );
-    const dispatch = useDispatch();
+    const { data: popularMovies, isLoading, isError } = useGetPopularMoviesQuery(currentPage);
 
-    useEffect(() => {
-        dispatch(fetchPopularMovies(currentPage));
-    }, [currentPage]);
-
-    if (popularMoviesLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (popularMoviesLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

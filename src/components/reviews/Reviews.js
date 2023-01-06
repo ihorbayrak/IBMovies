@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMovieReviews } from '../../utils/reducers/movieReviewsSlice/movieReviewsSlice';
+import { useGetReviewsAboutMovieQuery } from '../../redux/api/apiSlice';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -9,16 +6,12 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './reviews.scss';
 
 const Reviews = ({ movieId }) => {
-    const { movieReviewsLoadingStatus, movieReviews } = useSelector((state) => state.movieReviews);
-    const dispatch = useDispatch();
+    const { data: movieReviews, isLoading, isError } = useGetReviewsAboutMovieQuery(movieId);
 
-    useEffect(() => {
-        dispatch(fetchMovieReviews(movieId));
-    }, [movieId]);
-
-    if (movieReviewsLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (movieReviewsLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

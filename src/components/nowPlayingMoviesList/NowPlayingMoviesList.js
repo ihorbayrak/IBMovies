@@ -1,7 +1,6 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchNowPlayingMovies } from '../../utils/reducers/nowPlayingMoviesSlice/nowPlayingMoviesSlice';
+import { useGetNowPlayingMoviesQuery } from '../../redux/api/apiSlice';
 
 import MovieListItem from '../movieListItem/MovieListItem';
 import MovieGridList from '../moviesGridList/MoviesGridList';
@@ -10,40 +9,24 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './nowPlayingMoviesList.scss';
 
-const setContent = (status, Component, newMovieLoading) => {
-    switch (status) {
-        case 'loading':
-            return newMovieLoading ? <Component /> : <Spinner />;
-        case 'idle':
-            return <Component />;
-        case 'error':
-            return <ErrorMessage />;
-        default:
-            throw new Error('Unexpected process state');
-    }
-};
-
 const NowPlayingMoviesList = () => {
-    let { nowPlayingMoviesLoadingStatus, nowPlayingMovies, currentPage } = useSelector(
-        (state) => state.nowPlaying
-    );
-    const dispatch = useDispatch();
-
-    const [newMovieLoading, setNewMovieLoading] = useState(false);
+    const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+    const [moviesEnd, setMoviesEnd] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const [totalCount, setTotalCount] = useState(10);
 
-    useEffect(() => {
-        dispatch(fetchNowPlayingMovies(currentPage));
-    }, []);
+    const { data, isLoading, isError } = useGetNowPlayingMoviesQuery(currentPage, {
+        skip: moviesEnd,
+    });
 
     useEffect(() => {
-        if (currentPage === totalCount) return;
-
-        if (newMovieLoading) {
-            setNewMovieLoading(false);
-            dispatch(fetchNowPlayingMovies(currentPage));
+        if (data && data.length) {
+            setNowPlayingMovies([...nowPlayingMovies, ...data]);
         }
-    }, [newMovieLoading, currentPage]);
+        if (currentPage === totalCount) {
+            setMoviesEnd(true);
+        }
+    }, [data]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -59,9 +42,16 @@ const NowPlayingMoviesList = () => {
                 (e.target.documentElement.scrollTop + window.innerHeight) <
             100
         ) {
-            setNewMovieLoading(true);
+            setCurrentPage((prevState) => prevState + 1);
         }
     };
+
+    if (isLoading) {
+        return <Spinner />;
+    }
+    if (isError) {
+        return <ErrorMessage />;
+    }
 
     const renderItems = (arr) => {
         const movies = arr.map((movie) => {
@@ -71,13 +61,7 @@ const NowPlayingMoviesList = () => {
         return <MovieGridList className='movie__grid'>{movies}</MovieGridList>;
     };
 
-    const elements = useMemo(() => {
-        return setContent(
-            nowPlayingMoviesLoadingStatus,
-            () => renderItems(nowPlayingMovies),
-            newMovieLoading
-        );
-    }, [nowPlayingMoviesLoadingStatus]);
+    const elements = renderItems(nowPlayingMovies);
 
     return <section className='movie__list'>{elements}</section>;
 };

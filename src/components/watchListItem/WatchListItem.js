@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
-import { removeFromWatchList } from '../../utils/reducers/watchListSlice/watchListSlice';
+import { removeFromWatchList } from '../../redux/reducers/watchListSlice/watchListSlice';
 
 import { AiFillDelete } from 'react-icons/ai';
 

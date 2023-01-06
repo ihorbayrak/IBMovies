@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeHamburgerMenu } from '../../utils/reducers/navMenuSlice/navMenuSlice';
+import { closeHamburgerMenu } from '../../redux/reducers/navMenuSlice/navMenuSlice';
 
 import { NavLink } from 'react-router-dom';
 

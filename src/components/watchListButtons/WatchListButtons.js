@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     addToWatchList,
     removeFromWatchList,
-} from '../../utils/reducers/watchListSlice/watchListSlice';
+} from '../../redux/reducers/watchListSlice/watchListSlice';
 
 import { BsBookmarkHeart, BsBookmarkX } from 'react-icons/bs';
 

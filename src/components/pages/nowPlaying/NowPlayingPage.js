@@ -1,5 +1,3 @@
-import React from 'react';
-
 import NowPlayingMovieList from '../../nowPlayingMoviesList/NowPlayingMoviesList';
 
 const NowPlayingPage = () => {

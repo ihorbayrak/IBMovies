@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useGetTrendingMoviesQuery } from '../../redux/api/apiSlice';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchTrendingMovies } from '../../utils/reducers/trendingMoviesSlice/trendingMoviesSlice';
+import { useSelector } from 'react-redux';
 
 import MovieListItem from '../movieListItem/MovieListItem';
 import MoviesGridList from '../moviesGridList/MoviesGridList';
@@ -12,18 +11,17 @@ import './trendingMovieList.scss';
 
 const TrendingMovieList = () => {
     const { activeFilter } = useSelector((state) => state.filters);
-    const { trendingMoviesLoadingStatus, trendingMovies } = useSelector(
-        (state) => state.trendingMovies
-    );
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTrendingMovies(activeFilter));
-    }, [activeFilter]);
+    const {
+        data: trendingMovies,
+        isLoading,
+        isError,
+    } = useGetTrendingMoviesQuery(activeFilter);
 
-    if (trendingMoviesLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (trendingMoviesLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMovieInfo } from '../../utils/reducers/movieInfoSlice/movieInfoSlice';
+import { useGetInfoAboutMovieQuery } from '../../redux/api/apiSlice';
 
 import WatchListButtons from '../watchListButtons/WatchListButtons';
 import Spinner from '../spinner/Spinner';
@@ -15,16 +12,12 @@ import { formatNumbers } from '../../utils/functions/functions';
 import './singleMovieInfo.scss';
 
 const SingleMovieInfo = ({ movieId }) => {
-    const { movieInfoLoadingStatus, movieInfo } = useSelector((state) => state.movieInfo);
-    const dispatch = useDispatch();
+    const { data: movieInfo, isLoading, isError } = useGetInfoAboutMovieQuery(movieId);
 
-    useEffect(() => {
-        dispatch(fetchMovieInfo(movieId));
-    }, [movieId]);
-
-    if (movieInfoLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (movieInfoLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 

@@ -1,28 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchTopRatedMovies } from '../../../utils/reducers/topRatedMoviesSlice/topRatedMoviesSlice';
+import { useGetTopRatedMoviesQuery } from '../../../redux/api/apiSlice';
 
 import TopRatedItem from '../../topRatedItem/TopRatedItem';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 import PagePagination from '../../pagePagination/PagePagination';
 
+
 import './topRatedPage.scss';
 
 const TopRatedPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const { topRatedMoviesLoadingStatus, topRatedMovies } = useSelector((state) => state.topRated);
-    const dispatch = useDispatch();
+    const { data: topRatedMovies, isLoading, isError } = useGetTopRatedMoviesQuery(currentPage);
 
-    useEffect(() => {
-        dispatch(fetchTopRatedMovies(currentPage));
-    }, [currentPage]);
-
-    if (topRatedMoviesLoadingStatus === 'loading') {
+    if (isLoading) {
         return <Spinner />;
-    } else if (topRatedMoviesLoadingStatus === 'error') {
+    }
+    if (isError) {
         return <ErrorMessage />;
     }
 
